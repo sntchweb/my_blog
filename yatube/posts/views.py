@@ -20,6 +20,7 @@ def index(request):
     )
 
 
+
 def group_posts(request, slug):
     return render(
         request,
