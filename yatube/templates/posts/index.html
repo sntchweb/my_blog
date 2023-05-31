@@ -14,10 +14,10 @@
     {% include 'posts/includes/switcher.html' with index=True %}
     {% for post in page_obj %}
       {% include 'includes/post_card.html' with show_author_profile_link=True show_group=True %}
-      <p><a href="{% url 'posts:post_detail' post.pk %}">подробная информация</a></p>
-      {% if post.group %}
-        <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-      {% endif %}
+        <a class="btn btn-info" href="{% url 'posts:post_detail' post.pk %}" role="button">подробная информация</a>
+      {% comment %} {% if post.group %}
+        <a class="btn btn-info" href="{% url 'posts:group_list' post.group.slug %}" role="button">все записи группы</a>
+      {% endif %} {% endcomment %}
       {% if not forloop.last %}
         <hr />
       {% endif %}

@@ -2,12 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.cache import cache_page
 
-from .forms import PostForm, CommentForm
-from .models import Group, Post, User, Follow
-from .utils import get_pages
+from posts.forms import PostForm, CommentForm
+from posts.models import Group, Post, User, Follow
+from posts.utils import get_pages
 
 
-@cache_page(20, key_prefix='index_page')
+@cache_page(10, key_prefix='index_page')
 def index(request):
     return render(
         request,
@@ -18,7 +18,6 @@ def index(request):
                 Post.objects.select_related('author', 'group').all())
         }
     )
-
 
 
 def group_posts(request, slug):
@@ -145,3 +144,11 @@ def profile_unfollow(request, username):
         author=get_object_or_404(User, username=username)
     ).delete()
     return redirect('posts:profile', username=username)
+
+
+@login_required
+def post_delete(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.user == post.author:
+        get_object_or_404(Post, pk=post_id).delete()
+    return redirect('posts:profile', username=request.user.username)
