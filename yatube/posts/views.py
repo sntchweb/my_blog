@@ -15,7 +15,8 @@ def index(request):
         {
             'page_obj': get_pages(
                 request,
-                Post.objects.select_related('author', 'group').all())
+                Post.objects.select_related('author', 'group').all()),
+            'last_post': Post.objects.latest('pub_date')
         }
     )
 
