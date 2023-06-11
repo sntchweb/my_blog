@@ -6,7 +6,7 @@
   {% endblock %}
 </title>
 {% block content %}
-  <div class="container py-5">
+  <div class="container py-5 bg-light">
     <h1>Все посты пользователя {{ author.get_full_name }} </h1>
     <h3>Всего постов: {{ author.posts.count }} </h3>
     {% if request.user.is_authenticated and request.user != author %}
