@@ -28,9 +28,9 @@
     {% endif %}
     {% for post in page_obj %}
       {% include 'includes/post_card.html' with show_author_profile_link=False show_group=True %}
-        <p><a class="btn btn-info" href="{% url 'posts:post_detail' post.pk %}" role="button">подробная информация</a>
+        <p><a class="btn btn-sm btn-outline-secondary" href="{% url 'posts:post_detail' post.pk %}" role="button">подробная информация</a>
       {% if post.group %}
-        <a class="btn btn-info" href="{% url 'posts:group_list' post.group.slug %}" role="button">все записи группы</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'posts:group_list' post.group.slug %}" role="button">все записи группы</a>
       {% endif %}
       {% if not forloop.last %}
         <hr />

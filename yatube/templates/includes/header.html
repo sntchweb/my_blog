@@ -1,4 +1,5 @@
-{% comment %} {% load static %}
+{% load static %}
+<!-- {% comment %} {% load static %}
 <header>
   <nav class="navbar navbar-light" style="background-color: lightskyblue">
     <div class="container">
@@ -44,9 +45,9 @@
       </ul>
     </div>
   </nav>
-</header> {% endcomment %}
+</header> {% endcomment %} -->
 
-{% comment %} {% load static %}
+<!-- {% comment %} {% load static %}
 <header>
   <nav class="navbar navbar-light" style="background-color: lightskyblue">
     <div class="container">
@@ -92,9 +93,9 @@
       </ul>
     </div>
   </nav>
-</header> {% endcomment %}
+</header> {% endcomment %} -->
 
-{% comment %} <nav class="navbar navbar-expand-lg bg-white">
+<!-- {% comment %} <nav class="navbar navbar-expand-lg bg-white">
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -108,8 +109,7 @@
 </nav>
 <div class="container">
   <hr>
-</div> {% endcomment %}
-
+</div> {% endcomment %} -->
 
 <header>
   <div class="container">
@@ -118,22 +118,34 @@
       <div class="col-4 pt-1">
         <a class="text-muted" href="{% url 'posts:index' %}">Главная</a>
       </div>
-      {% comment %} <div class="col-4 text-center">
+      <!-- <div class="col-4 text-center">
         <a class="blog-header-logo text-dark" href="#">ТЕКСТ ПО ЦЕНТРУ ХЕДЕРА</a>
-      </div>  {% endcomment %}
+      </div> -->
       <div class="col-4 d-flex justify-content-end align-items-center">
-        {% comment %} <a class="text-muted" href="#">
+
+        <!-- {% comment %} <a class="text-muted" href="#">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-        </a> {% endcomment %}
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:signup' %}">Регистрация</a>
-        {% comment %} <div class="col-4 pt-1">
-          <a class="text-muted" href="{% url 'users:signup' %}">Регистрация</a>
-        </div> {% endcomment %}
+        </a> {% endcomment %} -->
+        {% with request.resolver_match.view_name as view_name %}
+          {% if request.user.is_authenticated %}
+            <a class="btn btn-sm btn-outline-secondary {% if view_name == 'posts:profile' %}active{% endif %}"
+              href="{% url 'posts:profile' user.username %}">{{ user.username }}</a> &nbsp&nbsp
+            <a class="btn btn-sm btn-outline-secondary {% if view_name == 'posts:post_create' %}active{% endif %}"
+              href="{% url 'posts:post_create' %}">Новая запись</a> &nbsp&nbsp
+            <a class="btn btn-sm btn-outline-secondary {% if view_name == 'users:password_change' %}active{% endif %}"
+              href="{% url 'users:password_change' %}">Изменить пароль</a> &nbsp&nbsp
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:logout' %}">Выйти</a>
+          {% else %}
+            <a class="btn btn-sm btn-outline-secondary {% if view_name == 'users:login' %}active{% endif %}"
+              href="{% url 'users:login' %}">Войти</a> &nbsp&nbsp
+            <a class="btn btn-sm btn-outline-secondary {% if view_name == 'users:signup' %}active{% endif %}"
+              href="{% url 'users:signup' %}">Регистрация</a>
+          {% endif %}
+        {% endwith %}
       </div>
     </div>
-    {% comment %} <hr> {% endcomment %}
     <div id="hr1">
-      <hr />
+      <hr/>
       </div>
       <style>
         #hr1 hr {
