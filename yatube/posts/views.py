@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.cache import cache_page
 
 from posts.forms import PostForm, CommentForm
-from posts.models import Group, Post, User, Follow
+from posts.models import Group, Post, User, Follow, Likes
 from posts.utils import get_pages
 
 
@@ -58,12 +58,25 @@ def profile(request, username):
 
 
 def post_detail(request, post_id):
+    if (request.user.is_authenticated) and not (
+            Likes.objects.filter(
+                user=request.user,
+                post=get_object_or_404(Post, pk=post_id)).exists()):
+        return render(
+            request,
+            'posts/post_detail.html',
+            {
+                'post': get_object_or_404(Post, pk=post_id),
+                'form': CommentForm(request.POST or None),
+            }
+        )
     return render(
         request,
         'posts/post_detail.html',
         {
             'post': get_object_or_404(Post, pk=post_id),
             'form': CommentForm(request.POST or None),
+            'liked': True
         }
     )
 
@@ -153,3 +166,22 @@ def post_delete(request, post_id):
     if request.user == post.author:
         get_object_or_404(Post, pk=post_id).delete()
     return redirect('posts:profile', username=request.user.username)
+
+
+@login_required
+def post_like(request, post_id):
+    Likes.objects.get_or_create(
+        user=request.user,
+        post=get_object_or_404(Post, pk=post_id)
+    )
+    return redirect('posts:post_detail', post_id=post_id)
+
+
+@login_required
+def post_unlike(request, post_id):
+    get_object_or_404(
+        Likes,
+        user=request.user,
+        post=get_object_or_404(Post, pk=post_id)
+    ).delete()
+    return redirect('posts:post_detail', post_id=post_id)
