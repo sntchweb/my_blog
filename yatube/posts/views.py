@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.cache import cache_page
 
 from posts.forms import PostForm, CommentForm
-from posts.models import Group, Post, User, Follow, Likes
+from posts.models import Group, Likes, Post, User, Follow
 from posts.utils import get_pages
 
 
