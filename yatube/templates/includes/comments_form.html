@@ -1,7 +1,7 @@
 {% load user_filters %}
 
 <br><br><br>
- <h4> Всего комментариев: {{ post.comments.all.count }} </h2>
+ <h4> Всего комментариев: {{ post.comments_count }} </h2>
 {% for comment in post.comments.all %}
   <div class="card">
     <div class="card-body">
