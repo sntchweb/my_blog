@@ -1,3 +1,35 @@
-# hw05_final
+# Пет-проект новостного/блог сайта.
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+## Описание проекта:
+Проект новостного/блог сайта с возможностью регистрации, публикации статей, комментарования записей, подписки на понравившегося автора, а также с возможностью лайкнуть понравившийся пост/новость. Настроена пагинация и кеширование главной страницы.
+
+## Как запустить проект:
+Клонировать репозиторий:
+```
+git clone git@github.com:sntchweb/my_blog.git
+```
+Cоздать и активировать виртуальное окружение:
+```
+py -m venv env
+source venv/bin/activate
+```
+Установить зависимости из файла requirements.txt:
+```
+pip install -r requirements.txt
+```
+Выполнить миграции:
+```
+py manage.py migrate
+```
+Запустить проект:
+```
+py manage.py runserver
+```
+
+## Стек:
+- Python 3.9
+- Django 2.2
+- SQLite
+
+## Автор:
+Лашин Артём

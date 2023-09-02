@@ -13,7 +13,7 @@ DEBUG = (os.getenv('DEBUG').lower() == 'true')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default='').split()
 
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = os.getenv('INTERNAL_IPS', default='').split()
 
 INSTALLED_APPS = [
     'django.contrib.admin',
