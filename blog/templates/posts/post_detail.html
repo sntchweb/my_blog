@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+<title>
+  {% block title %}
+    {{ post.text|truncatechars:30 }}
+  {% endblock %}
+</title>
+
+{% block content %}
+<div class="container py-5 bg-light">
+  <div class="row">
+    <aside class="col-12 col-md-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        </li>
+        {% if post.group %}
+          <li class="list-group-item">
+            Группа: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group }}</a>
+              
+          </li>
+        {% endif %}
+        <li class="list-group-item">
+          Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Всего постов автора:<span >{{ post.posts_count }}</span>
+        </li>
+      </ul>
+    </aside>
+      <article class="col-12 col-md-9">
+        {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+          <img class="card-img my-2" src="{{ im.url }}">
+        {% endthumbnail %}
+        <p>{{ post.text|linebreaksbr }}</p>
+        {% if request.user == post.author %}
+          <a class="btn btn-info" href="{% url 'posts:post_edit' post.pk %}" role="button">Редактировать запись</a>
+          <a class="btn btn-danger" href="{% url 'posts:post_delete' post.pk %}" role="button">Удалить запись</a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+          {% if liked %}
+          {{ post.liked_post.count }}
+          <a role="button" class="btn btn-danger" href="{% url 'posts:post_unlike' post.pk %}" title="Кликните чтобы убрать лайк">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+            </svg>
+          </a>
+          {% else %}
+          {{ post.liked_post.count }}
+          <a role="button" class="btn btn-outline-danger" href="{% url 'posts:post_like' post.pk %}" title="Кликните чтобы поставить лайк">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+            </svg>
+          </a>
+          {% endif %}
+        {% endif %}
+        {% include 'includes/comments_form.html' %}
+      </article>
+  </div>
+</div>
+{% endblock %}
