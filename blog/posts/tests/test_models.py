@@ -1,8 +1,7 @@
 from django.test import TestCase
 
-from posts.models import (Group, Post, User, Comment,
-                          FIRST_FIFTEEN_CHARS_OF_TEXT)
-
+from posts.models import (FIRST_FIFTEEN_CHARS_OF_TEXT, Comment, Group, Post,
+                          User)
 
 GROUP_SLUG = 'test_group'
 TEST_USER = 'test_views1'
@@ -79,8 +78,7 @@ class PostModelTest(TestCase):
 
     def test_comment_model_verbose_name(self):
         """
-        Проверяем, что verbose_name модели Comment
-        совпадает с ожидаемым.
+        Проверяем, что verbose_name модели Comment совпадает с ожидаемым.
         """
 
         field_labels = {

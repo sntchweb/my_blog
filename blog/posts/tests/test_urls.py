@@ -1,12 +1,11 @@
 from http import HTTPStatus
 
-from django.test import TestCase, Client
-from django.urls import reverse
 from django.core.cache import cache
-
+from django.test import Client, TestCase
+from django.urls import reverse
 from posts.models import Group, Post, User
-from blog.urls import handler404
 
+from blog.urls import handler404
 
 GROUP_SLUG = 'test_group'
 TEST_USER = 'test_urls1'

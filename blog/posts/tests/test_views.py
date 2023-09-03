@@ -1,21 +1,18 @@
 import shutil
 import tempfile
-
 from http import HTTPStatus
 
-from django.core.paginator import Page
-from django.test import Client, TestCase, override_settings
-from django.urls import reverse
 from django.conf import settings
 from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.paginator import Page
+from django.test import Client, TestCase, override_settings
+from django.urls import reverse
 
 from posts.forms import PostForm
-from posts.models import Group, Post, User, Follow
-
+from posts.models import Follow, Group, Post, User
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
-
 GROUP_SLUG = 'test_group'
 TEST_USER = 'test_views1'
 TEST_AUTHOR = 'test_post_author'

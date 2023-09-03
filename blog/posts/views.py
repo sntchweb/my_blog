@@ -8,7 +8,7 @@ from posts.models import Comment, Follow, Group, Likes, Post, User
 from posts.utils import get_pages
 
 
-@cache_page(10, key_prefix='index_page')
+@cache_page(5, key_prefix='index_page')
 def index(request):
     """Главная страница."""
 
@@ -24,6 +24,7 @@ def index(request):
     )
 
 
+@cache_page(10, key_prefix='group_page')
 def group_posts(request, slug):
     """Страница сообщества."""
 
@@ -42,6 +43,7 @@ def group_posts(request, slug):
     )
 
 
+@cache_page(10, key_prefix='profile_page')
 def profile(request, username):
     """Страница профиля."""
 
@@ -69,6 +71,7 @@ def profile(request, username):
     )
 
 
+@cache_page(10, key_prefix='post_detail_page')
 def post_detail(request, post_id):
     """Страница записи."""
 
