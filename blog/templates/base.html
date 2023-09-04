@@ -37,12 +37,17 @@
       href="{% static 'css/bootstrap.min.css' %}"
     />
 
-
     <title>
       {% block title %}
         <"base title">
       {% endblock %}
     </title>
+
+    <style>
+      a { text-decoration: none;}
+      a:hover {text-decoration: underline;}
+    </style>
+
   </head>
 
 
@@ -71,8 +76,8 @@
       {% comment %} ------------------------------------------------------------- с сайта {% endcomment %}
     </div> 
     </main>
-    <footer class="border-top text-center py-3">
+    <!-- <footer class="border-top text-center py-3"> -->
       {% include 'includes/footer.html' %}
-    </footer>
+    <!-- </footer> -->
   </body>
 </html>

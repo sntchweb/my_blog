@@ -71,7 +71,6 @@ def profile(request, username):
     )
 
 
-@cache_page(10, key_prefix='post_detail_page')
 def post_detail(request, post_id):
     """Страница записи."""
 

@@ -10,7 +10,11 @@
 {% block content %}
   {% comment %} -----------------------------------------------------------  бутстроап {% endcomment %}
   <div class="container bg-light">
+    {% if last_post.image %}
+      <div class="p-4 p-md-5 mb-4 text-white rounded" style="background-image: url({{ last_post.image.url }}); background-size: cover;">
+    {% else %}
       <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    {% endif %}
       <div class="col-md-6 px-0">
         <h1 class="display-4 fst-italic">{{ last_post.text|linebreaksbr|truncatechars:30 }}</h1>
         <p class="lead my-3">{{ last_post.text|linebreaksbr|truncatechars:150 }}</p>
@@ -21,29 +25,31 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">{{ last_post.group }} 2222</strong>
+          <strong class="d-inline-block mb-2 text-primary">{{ last_post.group }}</strong>
           <h3 class="mb-0">Рекомендуемый пост</h3>
           <div class="mb-1 text-muted">12 Ноября</div>
           <p class="card-text mb-auto">Э112312312312</p>
           <a href="#" class="stretched-link">продолжить чтение...</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Эскиз" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Эскиз</text></svg>
-
+          <!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Эскиз" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Эскиз222</text></svg> -->
+          <img src="{{ last_post.image.url}}" alt="Эскиз" width="200" height="250">
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success">{{ last_post.group }} 1111</strong>
+          <strong class="d-inline-block mb-2 text-success">{{ last_post.group }}</strong>
           <h3 class="mb-0">Заголовок поста</h3>
           <div class="mb-1 text-muted">11 Ноября</div>
           <p class="mb-auto">Это более широкая карточка с вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
           <a href="#" class="stretched-link">продолжить чтение...</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Эскиз" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Эскиз</text></svg>
+          <!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Эскиз" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Эскиз111</text></svg> -->
+          <!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Эскиз" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Эскиз111</text></svg> -->
+          <img src="{{ last_post.image.url}} " alt="Эскиз" width="200" height="250">
         </div>
       </div>
     </div>
@@ -51,7 +57,7 @@
 {% comment %} ----------------------------------------------------------- бутстроап {% endcomment %}
 <div class="row">
   <div class="col-md-10">
-    <h1>Последние добавленные записи</h1>
+    <h2 class="text-center">Последние добавленные записи</h2>
     <br>
     {% include 'posts/includes/switcher.html' with index=True %}
     {% for post in page_obj %}
