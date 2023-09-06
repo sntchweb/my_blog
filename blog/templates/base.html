@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="ru">
 
-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,34 +49,29 @@
 
   </head>
 
-
   <body>
     <header>
       {% include 'includes/header.html' %}
     </header>
     <main>
       <div class="container">
-      {% comment %} ------------------------------------------------------------- с сайта {% endcomment %}
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
           <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/cats/">Cats</a>
           <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/nature/">Nature</a>
-          <a class="p-2 text-muted" href="#">Technology</a>
-          <a class="p-2 text-muted" href="#">Design</a>
-          <a class="p-2 text-muted" href="#">Culture</a>
-          <a class="p-2 text-muted" href="#">Business</a>
-          <a class="p-2 text-muted" href="#">Politics</a>
-          <a class="p-2 text-muted" href="#">Sport</a>
+          <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/technology/">Technology</a>
+          <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/design/">Design</a>
+          <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/culture/">Culture</a>
+          <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/business/">Business</a>
+          <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/politics/">Politics</a>
+          <a class="p-2 text-muted" href="http://127.0.0.1:8000/group/sport/">Sport</a>
         </nav>
       </div>
       {% block content %}
         Контент не подвезли :(
       {% endblock %}
-      {% comment %} ------------------------------------------------------------- с сайта {% endcomment %}
     </div> 
     </main>
-    <!-- <footer class="border-top text-center py-3"> -->
       {% include 'includes/footer.html' %}
-    <!-- </footer> -->
   </body>
 </html>

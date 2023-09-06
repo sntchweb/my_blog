@@ -19,7 +19,9 @@ def index(request):
             'page_obj': get_pages(
                 request,
                 Post.objects.select_related('author', 'group').all()),
-            'last_post': Post.objects.latest('pub_date')
+            'last_post': Post.objects.latest('pub_date'),
+            'last_second_post': Post.objects.all().order_by('-pub_date')[1],  # подумать над другим способом передать переменную в шаблон
+            'last_third_post': Post.objects.all().order_by('-pub_date')[2],  # подумать над другим способом передать переменную в шаблон
         }
     )
 
