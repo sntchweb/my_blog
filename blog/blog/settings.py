@@ -11,9 +11,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', default='d3fau1t_s3cr3t_k3y')
 
 DEBUG = (os.getenv('DEBUG').lower() == 'true')
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default='').split()
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split()
 
-INTERNAL_IPS = os.getenv('INTERNAL_IPS', default='').split()
+INTERNAL_IPS = os.getenv('INTERNAL_IPS').split()
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,6 +25,7 @@ INSTALLED_APPS = [
 
     'sorl.thumbnail',
     'debug_toolbar',
+    'social_django',
 
     'posts.apps.PostsConfig',
     'users.apps.UsersConfig',
@@ -40,7 +41,21 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.yandex.YandexOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+SOCIAL_AUTH_YANDEX_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_YANDEX_OAUTH2_KEY')
+SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_YANDEX_OAUTH2_SECRET')
 
 MEDIA_URL = '/media/'
 
@@ -54,9 +69,9 @@ LOGIN_URL = 'users:login'
 
 LOGIN_REDIRECT_URL = 'posts:index'
 
-CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
+LOGOUT_REDIRECT_URL = 'posts:index'
 
-# LOGOUT_REDIRECT_URL = 'posts:index'
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 
 ROOT_URLCONF = 'blog.urls'
 
@@ -78,12 +93,15 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.year.year',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'blog.wsgi.application'
+
+# WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {

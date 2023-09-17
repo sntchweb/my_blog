@@ -1,7 +1,7 @@
 from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordChangeDoneView,
                                        PasswordChangeView)
-from django.urls import path
+from django.urls import path, include
 
 from users.views import SignUp
 
@@ -37,4 +37,5 @@ urlpatterns = [
         ),
         name='password_change_done'
     ),
+    # path('accounts/', include('allauth.urls')),
 ]

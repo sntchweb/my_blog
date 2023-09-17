@@ -126,6 +126,8 @@
         <!-- {% comment %} <a class="text-muted" href="#">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
         </a> {% endcomment %} -->
+        <a href="{% url "social:begin" "google-oauth2" %}">Enter Google</a>&nbsp&nbsp
+        <a href="{% url "social:begin" 'yandex-oauth2' %}">Enter Yandex</a>&nbsp&nbsp
         {% with request.resolver_match.view_name as view_name %}
           {% if request.user.is_authenticated %}
             <a class="btn btn-sm btn-outline-secondary {% if view_name == 'posts:profile' %}active{% endif %}"
