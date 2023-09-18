@@ -1,7 +1,7 @@
 from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordChangeDoneView,
                                        PasswordChangeView)
-from django.urls import path, include
+from django.urls import path
 
 from users.views import SignUp
 
