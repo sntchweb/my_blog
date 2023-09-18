@@ -20,7 +20,7 @@ def index(request):
                 request,
                 Post.objects.select_related('author', 'group').all()),
             'last_post': Post.objects.latest('pub_date'),
-            'last_second_post': Post.objects.all().order_by('-pub_date')[1],  # подумать над другим способом передать переменную в шаблон
+            'last_second_post': Post.objects.all().order_by('-pub_date')[1],  # подумать над другим способом передать переменную в шаблон и в целом над логикой
             'last_third_post': Post.objects.all().order_by('-pub_date')[2],  # подумать над другим способом передать переменную в шаблон
         }
     )
@@ -45,7 +45,6 @@ def group_posts(request, slug):
     )
 
 
-@cache_page(10, key_prefix='profile_page')
 def profile(request, username):
     """Страница профиля."""
 

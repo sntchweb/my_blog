@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
-
 {% block title %}Войти{% endblock %}
 {% block content %}
 {% load user_filters %}
   <div class="row justify-content-center">
-    <div class="col-md-8 p-5">
+    <aside class="col-12 col-md-3">
+      <ul class="list-group list-group-flush text-center">
+        <a href="{% url "social:begin" "google-oauth2" %}">Enter Google</a>
+      </ul>
+      <ul class="list-group list-group-flush text-center">
+        <a href="{% url "social:begin" 'yandex-oauth2' %}">Enter Yandex</a>
+      </ul>
+    </aside>
+    <div class="col-md-9 p-5">
       <div class="card">
         <div class="card-header">
           Войти на сайт
@@ -55,19 +62,14 @@
               </div>
             </div>
           {% endfor %}
-          <div class="col-md-6 offset-md-4">
+          <div class="col-md-6 offset-md-5">
             <button type="submit" class="btn btn-primary">
               Войти
             </button>
-            <!-- Тест на внимательность. Без переопределения шаблона этого адреса
-            не существует. Нужно что-то делать, иначе все упадет -->
-            {% comment %} <a href="{% url 'users:password_reset_form' %}" class="btn btn-link">
-              Забыли пароль?
-            </a> {% endcomment %}
           </div>
           </form>
-        </div> <!-- card body -->
-      </div> <!-- card -->
-    </div> <!-- col -->
-</div> <!-- row -->
+        </div>
+      </div>
+    </div>
+</div>
 {% endblock %}

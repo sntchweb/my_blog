@@ -27,11 +27,15 @@
           <strong class="d-inline-block mb-2 text-primary">{{ last_second_post.group }}</strong>
           <h4 class="mb-0">Рекомендуемый пост</h4>
           <div class="mb-1 text-muted">{{ last_second_post.pub_date }}</div>
-          <p class="mb-auto">{{ last_second_post.text|linebreaksbr|truncatechars:100 }}</p>
+          <p class="mb-auto">{{ last_second_post.text|linebreaksbr|truncatechars:80 }}</p>
           <a href="{% url 'posts:post_detail' last_second_post.pk %}" class="stretched-link">продолжить чтение...</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <img src="{{ last_post.image.url}}" alt="Эскиз" width="200" height="250">
+          {% if last_second_post.image %}
+            <img src="{{ last_second_post.image.url}}" alt="Эскиз" width="200" height="210">
+          {% else %}
+            <img src="https://placeholder.pics/svg/200x250/DEDEDE/555555/no%20image%20on%20post%20%3A(" alt="Эскиз" width="200" height="210">
+          {% endif %}
         </div>
       </div>
     </div>
@@ -41,11 +45,15 @@
           <strong class="d-inline-block mb-2 text-success">{{ last_third_post.group }}</strong>
           <h4 class="mb-0">Рекомендуемый пост</h4>
           <div class="mb-1 text-muted">{{ last_third_post.pub_date }}</div>
-          <p class="mb-auto">{{ last_third_post.text|linebreaksbr|truncatechars:100}}</p>
+          <p class="mb-auto">{{ last_third_post.text|linebreaksbr|truncatechars:80}}</p>
           <a href="{% url 'posts:post_detail' last_third_post.pk %}" class="stretched-link">продолжить чтение...</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <img src="{{ last_post.image.url}} " alt="Эскиз" width="200" height="250">
+          {% if last_third_post.image %}
+            <img src="{{ last_third_post.image.url}} " alt="Эскиз" width="200" height="210">
+          {% else %}
+            <img src="https://placeholder.pics/svg/200x250/DEDEDE/555555/no%20image%20on%20post%20%3A(" alt="Эскиз" width="200" height="210">
+          {% endif %}
         </div>
       </div>
     </div>
@@ -57,20 +65,16 @@
     {% include 'posts/includes/switcher.html' with index=True %}
     {% for post in page_obj %}
       {% include 'includes/post_card.html' with show_author_profile_link=True show_group=True %}
-        {% comment %} <a class="btn btn-info" href="{% url 'posts:post_detail' post.pk %}" role="button">подробная информация</a> {% endcomment %}
         <a class="btn btn-sm btn-outline-secondary" href="{% url 'posts:post_detail' post.pk %}" role="button">продолжить чтение...</a>
-      {% comment %} {% if post.group %}
-        <a class="btn btn-info" href="{% url 'posts:group_list' post.group.slug %}" role="button">все записи группы</a>
-      {% endif %} {% endcomment %}
       {% if not forloop.last %}
-        <hr />
+        <hr/>
       {% endif %}
     {% endfor %}
     {% include 'posts/includes/paginator.html' %}
   </div>
   <div class="col-md-2">
     <div class="p-4">
-      <h4 class="fst-italic">Архив записей</h4>
+      <h4 class="fst-italic">Архив записей</h4> {% comment %} В РАЗРАБОТКЕ{% endcomment %}
       <ol class="list-unstyled mb-0">
         <li><a href="#">Март 2021</a></li>
         <li><a href="#">Февраль 2021</a></li>

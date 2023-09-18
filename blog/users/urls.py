@@ -37,5 +37,4 @@ urlpatterns = [
         ),
         name='password_change_done'
     ),
-    # path('accounts/', include('allauth.urls')),
 ]
