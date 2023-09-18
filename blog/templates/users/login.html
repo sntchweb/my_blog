@@ -4,12 +4,12 @@
 {% block content %}
 {% load user_filters %}
   <div class="row justify-content-center">
-    <aside class="col-12 col-md-3">
+    <aside class="col-12 col-md-3 p-5">
       <ul class="list-group list-group-flush text-center">
-        <a href="{% url "social:begin" "google-oauth2" %}">Enter Google</a>
+        <a href="{% url "social:begin" "google-oauth2" %}">Войти через Gmail</a>
       </ul>
       <ul class="list-group list-group-flush text-center">
-        <a href="{% url "social:begin" 'yandex-oauth2' %}">Enter Yandex</a>
+        <a href="{% url "social:begin" 'yandex-oauth2' %}">Войти через Yandex</a>
       </ul>
     </aside>
     <div class="col-md-9 p-5">
