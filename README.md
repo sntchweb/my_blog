@@ -27,7 +27,11 @@ py manage.py migrate
 ```
 py manage.py runserver
 ```
-
+Для работы Oauth2 авторизации и регистрации необходимо создать приложения в почтовых сервисах `Yandex` и `Google`:
+```
+https://console.developers.google.com/
+https://oauth.yandex.ru
+```
 ## Стек:
 - Python 3.9
 - Django 2.2
