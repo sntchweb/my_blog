@@ -34,7 +34,7 @@ https://oauth.yandex.ru
 ```
 ## Стек:
 - Python 3.9
-- Django 2.2
+- Django 3.2
 - SQLite
 
 ## Что добавить:
